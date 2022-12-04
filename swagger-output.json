@@ -1,0 +1,233 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": "Backend test"
+  },
+  "host": "localhost:3001",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "profileId": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "profile_id"
+    }
+  },
+  "paths": {
+    "/admin/best-profession": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Field is required"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/admin/best-clients": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "start",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Field is required"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/balances/deposit/{userId}": {
+      "post": {
+        "tags": [
+          "Balances"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "amount": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Field is required"
+          },
+          "403": {
+            "description": "Profile is not client"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/contracts/{id}": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Contract not found"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/contracts/": {
+      "get": {
+        "tags": [
+          "Contracts"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/jobs/unpaid": {
+      "get": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    },
+    "/jobs/{job_id}/pay": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "job_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Profile is not client"
+          }
+        },
+        "security": [
+          {
+            "profileId": []
+          }
+        ]
+      }
+    }
+  }
+}
